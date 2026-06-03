@@ -1,0 +1,135 @@
+PYssembly
+
+Registradores
+
+A, B -> uso geral
+
+RES -> resultado das operações
+
+FLAG -> resultado do CMP
+
+PC -> contador de programa
+
+STORE
+
+Guarda um valor em um registrador.
+
+STORE A 10
+
+SUM
+
+Soma dois registradores.
+
+SUM A B
+
+RES = A + B
+
+SUB
+
+Subtrai dois registradores.
+
+SUB A B
+
+RES = A - B
+
+MUL
+
+Multiplica dois registradores.
+
+MUL A B
+
+RES = A * B
+
+DIV
+
+Divide dois registradores.
+
+DIV A B
+
+RES = A / B
+
+MOV
+
+Copia um registrador para outro.
+
+MOV A B
+
+B recebe o valor de A
+
+CMP
+
+Compara dois registradores.
+
+CMP A B
+
+FLAG = 1 -> iguais
+
+FLAG = 0 -> diferentes
+
+JMP
+
+Salto incondicional.
+
+JMP 10
+
+JE
+
+Salta se FLAG = 1
+
+JE 10
+
+JNE
+
+Salta se FLAG = 0
+
+JNE 10
+
+INPUT
+
+Lê um número digitado.
+
+INPUT A
+
+PRINT
+
+Mostra o valor de um registrador.
+
+PRINT A
+
+CPU
+
+Mostra todos os registradores.
+
+CPU
+
+RUN
+
+Executa o programa.
+
+RUN
+
+CLEAR
+
+Limpa o programa.
+
+CLEAR
+
+END
+
+Fecha o interpretador.
+
+END
+
+Exemplo
+
+STORE A 4
+
+STORE B 5
+
+SUM A B
+
+PRINT RES
+
+Saída:
+
+9
