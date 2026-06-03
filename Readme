@@ -1,64 +1,99 @@
-PYssembly
+# PYssembly
 
-Registradores
+## O que é
 
-A, B -> uso geral
+PYssembly é uma linguagem inspirada em Assembly desenvolvida em Python para estudo de:
 
-RES -> resultado das operações
+- Registradores
+- ALU
+- Program Counter (PC)
+- Saltos condicionais
+- Máquinas virtuais
+
+---
+
+## Como funciona
+
+O programa é armazenado em uma lista de instruções.
+
+Quando o comando RUN é executado:
+
+1. O PC é definido como 0.
+2. A instrução atual é executada.
+3. O PC avança para a próxima linha.
+4. Instruções como JMP, JE e JNE podem alterar o PC.
+5. O processo continua até o final do programa.
+
+---
+
+## CPU
+
+A CPU possui alguns registradores especiais.
 
 FLAG -> resultado do CMP
 
-PC -> contador de programa
+RES -> resultado das operações matemáticas
 
-STORE
+PC -> Program Counter
+
+A, B -> registradores gerais
+
+Novos registradores podem ser criados através do comando STORE.
+
+---
+
+## ALU
+
+A ALU é composta pelas instruções:
+
+SUM
+SUB
+MUL
+DIV
+
+Todas armazenam o resultado em RES.
+
+---
+
+## Instruções
+
+### STORE
 
 Guarda um valor em um registrador.
 
 STORE A 10
 
-SUM
-
-Soma dois registradores.
+### SUM
 
 SUM A B
 
 RES = A + B
 
-SUB
-
-Subtrai dois registradores.
+### SUB
 
 SUB A B
 
 RES = A - B
 
-MUL
-
-Multiplica dois registradores.
+### MUL
 
 MUL A B
 
 RES = A * B
 
-DIV
-
-Divide dois registradores.
+### DIV
 
 DIV A B
 
 RES = A / B
 
-MOV
-
-Copia um registrador para outro.
+### MOV
 
 MOV A B
 
 B recebe o valor de A
 
-CMP
-
-Compara dois registradores.
+### CMP
 
 CMP A B
 
@@ -66,64 +101,57 @@ FLAG = 1 -> iguais
 
 FLAG = 0 -> diferentes
 
-JMP
-
-Salto incondicional.
+### JMP
 
 JMP 10
 
-JE
+Salto incondicional.
 
-Salta se FLAG = 1
+### JE
 
 JE 10
 
-JNE
+Salta se FLAG = 1.
 
-Salta se FLAG = 0
+### JNE
 
 JNE 10
 
-INPUT
+Salta se FLAG = 0.
 
-Lê um número digitado.
+### INPUT
 
 INPUT A
 
-PRINT
+Lê um número digitado pelo usuário.
 
-Mostra o valor de um registrador.
+### PRINT
 
 PRINT A
 
-CPU
+Mostra o valor do registrador.
+
+### CPU
 
 Mostra todos os registradores.
 
-CPU
-
-RUN
+### RUN
 
 Executa o programa.
 
-RUN
-
-CLEAR
+### CLEAR
 
 Limpa o programa.
 
-CLEAR
-
-END
+### END
 
 Fecha o interpretador.
 
-END
+---
 
-Exemplo
+## Exemplo
 
 STORE A 4
-
 STORE B 5
 
 SUM A B
