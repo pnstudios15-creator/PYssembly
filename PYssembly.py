@@ -43,6 +43,12 @@ def SUM(reg1, reg2):
 def SUB(reg1, reg2):
     return reg1 - reg2
     
+def MUL(reg1, reg2):
+    return reg1 * reg2
+    
+def DIV(reg1, reg2):
+    return reg1 / reg2
+    
 def MOV(reg1, reg2):
     cpu[reg2] = cpu[reg1]
     
@@ -51,6 +57,13 @@ def CMP(reg1, reg2):
         cpu["FLAG"] = 1
     else:
         cpu["FLAG"] = 0
+        
+def INPUT(reg):
+    usr_in = int(input(f'>>{reg}> '))
+    cpu[reg] = usr_in
+    
+def PRINT(reg):
+    print(cpu[reg])
 
 #------------------
 
@@ -71,8 +84,7 @@ def exec(code):
         elif command == "SUM":
             if err(code_split): return
             reg1 = cpu[code_split[1]]
-            reg2 = cpu[code_split[2]]
-            
+            reg2 = cpu[code_split[2]]            
             cpu['RES'] = SUM(reg1, reg2)
             
         elif command == "SUB":
@@ -80,6 +92,19 @@ def exec(code):
             reg1 = cpu[code_split[1]]
             reg2 = cpu[code_split[2]]
             cpu['RES'] = SUB(reg1, reg2)
+            
+            
+        elif command == "MUL":
+            if err(code_split): return
+            reg1 = cpu[code_split[1]]
+            reg2 = cpu[code_split[2]]         
+            cpu['RES'] = MUL(reg1, reg2)
+            
+        elif command == "DIV":
+            if err(code_split): return
+            reg1 = cpu[code_split[1]]
+            reg2 = cpu[code_split[2]]            
+            cpu['RES'] = DIV(reg1, reg2)
             
         elif command == "MOV":
             if err(code_split): return
@@ -112,6 +137,20 @@ def exec(code):
                 return
             if cpu["FLAG"] == 0:
                 cpu["PC"] = int(code_split[1])
+                
+        elif command == "INPUT":
+            if len(code_split) != 2:
+                print("err")
+                return
+            reg = code_split[1]
+            INPUT(reg)
+            
+        elif command == "PRINT":
+            if len(code_split) != 2:
+                print("err")
+                return
+            reg = code_split[1]
+            PRINT(reg)
             
         elif command == "CPU":
             print(cpu)
