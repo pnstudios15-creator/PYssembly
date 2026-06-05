@@ -4,14 +4,14 @@ import os
 MAX_EXEC = 1000
 
 cpu = {
-    
     "FLAG": 0,
     "RES": 0,
     "PC": 0,
     "A": 0,
     "B": 0,
-    
 }
+
+ram = [0] * 256
 
 program = []
 
@@ -64,6 +64,12 @@ def INPUT(reg):
     
 def PRINT(reg):
     print(cpu[reg])
+    
+def SAVE(reg, addr):
+    ram[addr] = cpu[reg]
+    
+def LOAD(reg, addr):
+    cpu[reg] = ram[addr]
 
 #------------------
 
@@ -152,12 +158,25 @@ def exec(code):
             reg = code_split[1]
             PRINT(reg)
             
-        elif command == "CPU":
-            print(cpu)
+        
             
         elif command == "RES":
             print(cpu['RES'])
+            
+        elif command == "SAVE":
+            if err(code_split): return
+            reg = code_split[1]
+            addr = code_split[2]
+            SAVE(reg, addr)
+            
+        elif command == "LOAD":
+            if err(code_split): return
+            reg = code_split[1]
+            addr = code_split[2]
+            LOAD(reg, addr)
            
+        elif command == "MEM":
+            print(ram)
            
 def terminal():
     while True:
@@ -165,6 +184,12 @@ def terminal():
         
         if code == 'END':     
             return
+            
+        elif code == "CPU":
+            print(cpu)
+            
+        elif code == "MEM":
+            print(ram)
             
         elif code == "RUN":
             cpu["PC"] = 0
@@ -187,6 +212,24 @@ def terminal():
         elif code == "CLEAR":
             program.clear()
             
+        elif code == "SAVE PGM":
+            name = input("PGM name >>> ")
+            with open(f"{name}.txt", "w", encoding = "utf-8") as file:
+                for linha in program:
+                    file.write(linha + "\n")
+            print('PGM Saved!')
+            
+        elif code == "LOAD PGM":
+            print(os.getcwd())
+            print(os.listdir())
+            name = input("PGM name >>> ")        
+            with open(f"{name}.txt", "r", encoding="utf-8") as file:
+                program.clear()        
+                for linha in file:
+                    program.append(linha.strip())        
+            scr_show_code()
+            print("PGM Loaded!")
+                    
         else:
             program.append(code)
             scr_show_code()
