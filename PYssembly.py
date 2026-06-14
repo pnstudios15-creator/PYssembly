@@ -185,6 +185,44 @@ def terminal():
         if code == 'END':     
             return
             
+        elif code == 'HELP':
+            print("""
+=== PYssembly Commands ===
+
+STORE REG VALOR   - Armazena um valor em um registrador
+SUM REG REG       - Soma dois registradores
+SUB REG REG       - Subtrai dois registradores
+MUL REG REG       - Multiplica dois registradores
+DIV REG REG       - Divide dois registradores
+
+MOV REG REG       - Copia valor entre registradores
+CMP REG REG       - Compara dois registradores
+
+JMP LINHA         - Salta para uma linha
+JE LINHA          - Salta se FLAG = 1
+JNE LINHA         - Salta se FLAG = 0
+
+INPUT REG         - Lê valor do usuário
+PRINT REG         - Exibe valor do registrador
+
+SAVE REG ADDR     - Salva registrador na RAM
+LOAD REG ADDR     - Carrega da RAM para registrador
+
+CPU               - Exibe estado da CPU
+MEM               - Exibe conteúdo da RAM
+
+RUN               - Executa o programa
+CLEAR             - Limpa o programa
+CLR LINE          - Remove a última linha
+
+SAVE PGM          - Salva programa em arquivo
+LOAD PGM          - Carrega programa de arquivo
+
+END               - Fecha o PYssembly
+
+==========================
+""")
+            
         elif code == "CPU":
             print(cpu)
             
@@ -212,6 +250,11 @@ def terminal():
         elif code == "CLEAR":
             program.clear()
             
+        elif code == "CLR LINE":
+            if program:
+                program.pop()
+                scr_show_code()
+                
         elif code == "SAVE PGM":
             name = input("PGM name >>> ")
             with open(f"{name}.txt", "w", encoding = "utf-8") as file:
@@ -229,15 +272,19 @@ def terminal():
                     program.append(linha.strip())        
             scr_show_code()
             print("PGM Loaded!")
-                    
+                   
         else:
             program.append(code)
             scr_show_code()
-        
    
 def scr_show_code():
     cls()
     for i, linha in enumerate(program):
         print(f"{i}: {linha}")
                   
+def startup():
+      print("========== PYasm ==========")
+      print("Type 'HELP' to see commands  ")
+                  
+startup()
 terminal()
